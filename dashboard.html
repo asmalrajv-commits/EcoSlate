@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSlate | Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="brand">
+        <span class="brand-icon">🌿</span>
+        <h2>EcoSlate</h2>
+      </div>
+
+      <p class="sidebar-label">MAIN MENU</p>
+
+      <nav>
+        <button onclick="showPage('dashboard')">🏠 Dashboard</button>
+        <button onclick="showPage('library')">📚 My Library</button>
+        <button onclick="showPage('notebook')">📝 Notebook</button>
+        <button onclick="showPage('learning')">🌐 Learning Web</button>
+        <button onclick="showPage('impact')">🌍 Eco Impact</button>
+        <button data-page="teacher" onclick="showPage('teacher')">
+          👩‍🏫 Teacher Portal
+        </button>
+        <button onclick="showPage('profile')">👤 My Profile</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button onclick="logoutStudent()">🚪 Logout</button>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <div>
+          <h2>Learning Dashboard</h2>
+          <p>Learn smart. Live green.</p>
+        </div>
+
+        <div class="user-info">
+          <span>🌱</span>
+          <span id="welcome-message">Welcome!</span>
+        </div>
+      </header>
+
+      <!-- DASHBOARD PAGE -->
+      <section id="dashboard" class="page active">
+
+        <div class="welcome-card">
+          <div>
+            <h1>Welcome to EcoSlate! 🌿</h1>
+            <p>Your digital classroom for a greener future.</p>
+          </div>
+          <span class="welcome-icon">🌳</span>
+        </div>
+
+        <h2>My Learning Space</h2>
+
+        <div class="feature-grid">
+
+          <div class="feature-card" onclick="showPage('library')">
+            <span>📚</span>
+            <h3>Digital Library</h3>
+            <p>Access your digital textbooks.</p>
+          </div>
+
+          <div class="feature-card" onclick="showPage('notebook')">
+            <span>📝</span>
+            <h3>Smart Notebook</h3>
+            <p>Write and save your notes.</p>
+          </div>
+
+          <div class="feature-card" onclick="showPage('learning')">
+            <span>🌐</span>
+            <h3>Learning Web</h3>
+            <p>Explore approved educational websites.</p>
+          </div>
+
+          <div class="feature-card" onclick="showPage('impact')">
+            <span>🌍</span>
+            <h3>Eco Impact</h3>
+            <p>Discover how digital learning helps nature.</p>
+          </div>
+
+        </div>
+
+        <h2>My Subjects</h2>
+
+        <div class="subject-grid">
+          <button onclick="openSubject('Science')">🔬 Science</button>
+          <button onclick="openSubject('Mathematics')">📐 Mathematics</button>
+          <button onclick="openSubject('Social Science')">🌏 Social Science</button>
+          <button onclick="openSubject('English')">📖 English</button>
+          <button onclick="openSubject('Hindi')">✍️ Hindi</button>
+          <button onclick="openSubject('Malayalam')">📚 Malayalam</button>
+        </div>
+
+        <p id="subject-message"></p>
+
+      </section>
+
+      <!-- LIBRARY PAGE -->
+      <section id="library" class="page">
+
+        <h1>📚 Digital Library</h1>
+        <p>Your textbooks in one place.</p>
+
+        <div class="content-card">
+          <h2>Add a Textbook</h2>
+
+          <label for="book-subject">Subject</label>
+          <input
+            type="text"
+            id="book-subject"
+            placeholder="Example: Science"
+          >
+
+          <label for="textbook-file">Select PDF textbook</label>
+          <input
+            type="file"
+            id="textbook-file"
+            accept="application/pdf"
+          >
+
+          <button onclick="addTextbook()">Add Textbook</button>
+
+          <p id="book-message"></p>
+        </div>
+
+        <div class="content-card">
+          <h2>My Textbooks</h2>
+          <div id="textbook-list"></div>
+        </div>
+
+        <div class="content-card">
+          <h2 id="reader-title">PDF Reader</h2>
+          <iframe
+            id="pdf-frame"
+            title="Textbook PDF reader"
+            width="100%"
+            height="500"
+          ></iframe>
+        </div>
+
+      </section>
+
+      <!-- NOTEBOOK PAGE -->
+      <section id="notebook" class="page">
+
+        <h1>📝 Smart Notebook</h1>
+        <p>Write your ideas and save your learning notes.</p>
+
+        <div class="content-card">
+
+          <label for="note-title">Note Title</label>
+          <input
+            type="text"
+            id="note-title"
+            placeholder="Enter your note title"
+          >
+
+          <label for="note-text">Your Notes</label>
+          <textarea
+            id="note-text"
+            rows="8"
+            placeholder="Start writing here..."
+          ></textarea>
+
+          <button onclick="saveNote()">💾 Save Note</button>
+
+        </div>
+
+        <div class="content-card">
+          <h2>My Saved Notes</h2>
+          <div id="notes"></div>
+        </div>
+
+      </section>
+
+      <!-- LEARNING WEB PAGE -->
+      <section id="learning" class="page">
+
+        <h1>🌐 Learning Web</h1>
+        <p>Explore educational websites approved for EcoSlate.</p>
+
+        <div class="content-card">
+
+          <h2>Website Checker</h2>
+
+          <label for="website">Enter a website</label>
+          <input
+            type="text"
+            id="website"
+            placeholder="Example: ncert.nic.in"
+          >
+
+          <button onclick="checkWebsite()">Check Website</button>
+
+          <p id="website-result"></p>
+
+        </div>
+
+        <div class="content-card">
+          <h2>Approved Educational Websites</h2>
+          <ul>
+            <li>NCERT</li>
+            <li>Khan Academy</li>
+            <li>Wikipedia</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- ECO IMPACT PAGE -->
+      <section id="impact" class="page">
+
+        <h1>🌍 Eco Impact</h1>
+        <p>Small digital changes can support a greener future.</p>
+
+        <div class="feature-grid">
+
+          <div class="feature-card">
+            <span>🌳</span>
+            <h3>Save Trees</h3>
+            <p>Reduce the need for printed learning materials.</p>
+          </div>
+
+          <div class="feature-card">
+            <span>💧</span>
+            <h3>Save Water</h3>
+            <p>Help reduce the resources used in paper production.</p>
+          </div>
+
+          <div class="feature-card">
+            <span>🎒</span>
+            <h3>Light Schoolbags</h3>
+            <p>Keep learning materials together digitally.</p>
+          </div>
+
+          <div class="feature-card">
+            <span>♻️</span>
+            <h3>Less Paper Waste</h3>
+            <p>Encourage responsible digital learning.</p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- TEACHER PORTAL -->
+      <section id="teacher" class="page">
+
+        <h1>👩‍🏫 Teacher Portal</h1>
+        <p>Manage educational website access.</p>
+
+        <div class="content-card">
+
+          <h2>Add an Approved Website</h2>
+
+          <label for="teacher-new-site">Website domain</label>
+          <input
+            type="text"
+            id="teacher-new-site"
+            placeholder="Example: education.gov.in"
+          >
+
+          <button onclick="teacherAddSite()">Approve Website</button>
+
+          <p id="teacher-site-message"></p>
+
+        </div>
+
+        <div class="content-card">
+          <h2>Pending Website Requests</h2>
+          <div id="requests"></div>
+        </div>
+
+        <div class="content-card">
+          <h2>Approved Websites</h2>
+          <div id="approved-sites"></div>
+        </div>
+
+      </section>
+
+      <!-- PROFILE PAGE -->
+      <section id="profile" class="page">
+
+        <h1>👤 My Profile</h1>
+
+        <div class="content-card">
+          <h2>Account Information</h2>
+
+          <p><strong>Name:</strong> <span id="profile-name"></span></p>
+          <p><strong>Email:</strong> <span id="profile-email"></span></p>
+          <p><strong>User ID:</strong> <span id="profile-id"></span></p>
+          <p><strong>Role:</strong> <span id="profile-role"></span></p>
+
+        </div>
+
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <p>🌿 EcoSlate — Learn Smart. Live Green.</p>
+        <p>Building a sustainable future through digital education.</p>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
